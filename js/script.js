@@ -70,7 +70,7 @@ function showPage (list, page){
 Create the `addPagination` function
 This function will create and insert/append the elements needed for the pagination buttons
 */
-function addPagination(list){
+function addPagination(list, activePage){
    const pageNumberList = document.querySelector('.link-list');
    const buttonCount = Math.ceil(list.length / 9);
    pageNumberList.innerHTML = '';
@@ -83,7 +83,8 @@ function addPagination(list){
 
       //if active page number equals i set classname to active
       //pageButtons.className = 'active';
-      if(pageButton.textContent ===`1`){
+      
+      if(pageButton.textContent ===activePage){
          pageButton.className = 'active';
       };
 
@@ -95,25 +96,15 @@ function addPagination(list){
 
 // Call functions
 showPage(data, 1);
-addPagination(data);
+addPagination(data, '1');
 const pageUl = document.querySelector('.link-list'); 
 
 pageUl.addEventListener('click', (e)=>{
-   const activePage = e.target.textContent;
-   const activeLi = document.querySelector('.active');
    
    if (e.target.tagName ==='BUTTON'){  
-      e.preventDefault(); 
+      const activePage = e.target.textContent;
+      addPagination(data, activePage); 
       showPage(data, activePage);
-      addPagination(data); 
-
-      //new stuff
-      const btn = e.target;
-      const btnLi = btn.parentNode;
-      console.log(btn.parentNode);
-      //delete button
-      btnLi.removeChild(btn);
-      //end
       
    };
 
