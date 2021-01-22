@@ -62,14 +62,19 @@ function addPagination(list){
    const buttonCount = Math.ceil(list.length / 9);
    pageNumberList.innerHTML = '';
    for (i=1; i<= buttonCount; i++){
-      pageNumberList.insertAdjacentHTML('beforeend',`
-         <li>
-            <button type="button" class="">${i}</button>
-         </li>
-      `);
-   };
-   if(list.length > 0){
-      pageNumberList.firstElementChild.firstElementChild.className="active";
+      if(i === 1){
+         pageNumberList.insertAdjacentHTML('beforeend',`
+            <li>
+               <button type="button" class="active">${i}</button>
+            </li>
+         `);
+      } else if (i > 1){
+         pageNumberList.insertAdjacentHTML('beforeend',`
+            <li>
+               <button type="button" class="">${i}</button>
+            </li>
+         `);
+      };
    };
 };  
 
