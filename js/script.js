@@ -1,9 +1,8 @@
-//Global references to the ul's to store student list and page list
+//This is the location in the DOM where the search bar will be inserted. Dynamic insertion is a requirement of the project.
 const searchBarLocation = document.getElementsByClassName('header')[0].firstElementChild;
 const pageNumberList = document.querySelector('.link-list'); 
 const studentList = document.querySelector('.student-list');
 
-//Create the search bar and insert in header
 searchBarLocation.insertAdjacentHTML("afterend",`
    <label for="search" class="student-search">
       <input id="search" placeholder="Search by name...">
@@ -12,14 +11,17 @@ searchBarLocation.insertAdjacentHTML("afterend",`
    </label>
    `);
 
-//This function creates a filtered version of the data Object based on text in search field
+//Variables used by filteredData function and event listener
 const searchInput = document.getElementById('search');
 const searchButton = searchInput.nextElementSibling;
 let filteredData=[];
+//This function creates a filtered version of the data object based on text in search field
 function createSearchArray (){
    searchName = searchInput.value.toLowerCase();
-   filteredData = data.filter(data => 
-      (data.name.first+data.name.last).toLowerCase().match(searchName)||(data.name.first+' '+data.name.last).toLowerCase().match(searchName)||data.name.first.toLowerCase().match(searchName)||data.name.last.toLowerCase().match(searchName));
+   filteredData = data.filter(datum => {
+      const fullName = datum.name.first+' '+datum.name.last;
+      return fullName.toLowerCase().includes(searchName);
+   });
    showPage(filteredData,1);
    addPagination(filteredData);
 };
