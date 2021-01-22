@@ -26,7 +26,7 @@ function createSearchArray (){
    addPagination(filteredData);
 };
 
-//This function clears the "page" of students and rebuilds based on the page number clicked
+//This function clears the "page" of students and rebuilds based on the page number clicked. Append no results found message if list is empty
 function showPage (list, pageNumber){
    let endIndex = pageNumber * 9;
    const startIndex = endIndex-9;
@@ -34,8 +34,6 @@ function showPage (list, pageNumber){
       endIndex = list.length;
    };  
    studentList.innerHTML = '';  
-   //Create and append a student as a list item then insert into the student-list ul
-   //Append no results found message if list is empty
    if(list.length === 0){
       studentList.innerHTML =`
          <li>No results Found</li>   
@@ -58,8 +56,7 @@ function showPage (list, pageNumber){
    };
 };
 
-//Create the page button elements and insert in the link list. 
-//If list is not empty set the first button's class name to active.
+//Create the page button elements and insert in the link list. If list is not empty set the first button's class name to active.
 function addPagination(list){
    const buttonCount = Math.ceil(list.length / 9);
    pageNumberList.innerHTML = '';
@@ -80,7 +77,6 @@ function addPagination(list){
    };
 };  
 
-//Event Listeners
 searchInput.addEventListener('keyup', (e)=>{
    createSearchArray();
 });
