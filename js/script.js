@@ -17,7 +17,7 @@ const searchButton = searchInput.nextElementSibling;
 let filteredData=[];
 //This function creates a filtered version of the data object based on text in search field
 function createSearchArray (){
-   searchName = searchInput.value.toLowerCase().replace(/\s+/g,'');
+   searchName = searchInput.value.toLowerCase().replaceAll(' ','');
    filteredData = data.filter(datum => {
       const fullName = `${datum.name.first}${datum.name.last}`;
       return fullName.toLowerCase().includes(searchName);
